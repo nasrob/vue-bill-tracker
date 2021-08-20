@@ -2,10 +2,12 @@
 	<main>
 		<NavBar />
 		<div class="container flex">
-			<BillsTable />
-		</div>
-		<div class="w-1/2">
-			<Char :bills="activeBills" />
+			<div class="w-1/2">
+				<BillsTable />
+			</div>
+			<div class="w-1/2">
+				<Chart />
+			</div>
 		</div>
 	</main>
 </template>
@@ -18,6 +20,7 @@ import Chart from "./components/Chart.vue";
 import BillsTable from "./components/BillsTable.vue";
 
 export default {
+	/* eslint-disable */
 	name: "App",
 	components: {
 		AddCategory,
