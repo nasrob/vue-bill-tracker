@@ -8,7 +8,7 @@
 			<div class="mb-4">
 				<h1 class="text-gray-800">Enter a category of bills</h1>
 				<p>E.g. 'Electricity' or 'Gas' or 'Internet'</p>
-				<div class="flex">
+				<div class="flex mt-4">
 					<input
 						placeholder="Add a category"
 						v-model="category"
@@ -29,7 +29,7 @@
 <script>
 export default {
 	name: "AddCategory",
-	data: function() {
+	data() {
 		return {
 			category: "",
 		};
