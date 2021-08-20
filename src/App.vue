@@ -1,12 +1,18 @@
 <template>
 	<main>
-		<NavBar />
-		<div class="container flex">
-			<div class="w-1/2">
-				<BillsTable />
-			</div>
-			<div class="w-1/2">
-				<Chart />
+		<AddCategory
+			v-if="shouldShowAddCategory"
+			v-on:addCategory="addCategory"
+		/>
+		<div v-else>
+			<NavBar />
+			<div class="container flex">
+				<div class="w-1/2">
+					<BillsTable />
+				</div>
+				<div class="w-1/2">
+					<Chart :bills="activeBills" />
+				</div>
 			</div>
 		</div>
 	</main>
@@ -28,6 +34,19 @@ export default {
 		Chart,
 		BillsTable,
 		NavBar,
+	},
+	data() {
+		return {
+			bills: [],
+			categories: [],
+			shouldShowAddCategory: true,
+		};
+	},
+	methods: {
+		addCategory() {
+			this.categories.push(category);
+			this.shouldShowAddCategory = false;
+		},
 	},
 };
 </script>
