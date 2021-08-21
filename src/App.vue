@@ -18,7 +18,10 @@
 			/>
 			<div class="container flex">
 				<div class="w-1/2">
-					<BillsTable />
+					<BillsTable
+						:bills="bills"
+						v-on:triggerShowAddBill="triggerShowAddBill"
+					/>
 				</div>
 				<div class="w-1/2">
 					<Chart :bills="activeBills" />
@@ -64,6 +67,9 @@ export default {
 		addBill(bill) {
 			this.bills.push(bill);
 			this.shouldShowAddBill = false;
+		},
+		triggerShowAddBill() {
+			this.shouldShowAddBill = true;
 		},
 	},
 	watch: {
