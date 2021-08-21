@@ -2,10 +2,13 @@
 	<main>
 		<AddCategory
 			v-if="shouldShowAddCategory"
-			v-on:addCategory="addCategory"
+			v-on:addCategory="addCategory($event)"
 		/>
 		<div v-else>
-			<NavBar />
+			<NavBar
+				:categories="categories"
+				v-on:triggerShowAddCategory="triggerShowAddCategory"
+			/>
 			<div class="container flex">
 				<div class="w-1/2">
 					<BillsTable />
@@ -43,11 +46,12 @@ export default {
 		};
 	},
 	methods: {
-		addCategory() {
-			console.log(category);
-
+		addCategory(category) {
 			this.categories.push(category);
 			this.shouldShowAddCategory = false;
+		},
+		triggerShowAddCategory() {
+			this.shouldShowAddCategory = true;
 		},
 	},
 	watch: {
