@@ -1,9 +1,16 @@
+/* eslint-disable vue/valid-v-else */
 <template>
 	<main>
 		<AddCategory
 			v-if="shouldShowAddCategory"
 			v-on:addCategory="addCategory($event)"
 		/>
+		<div v-else-if="shouldShowAddBill">
+			<AddBill
+				:categories="categories"
+				v-on:addBill="addBill($event)"
+			/>
+		</div>
 		<div v-else>
 			<NavBar
 				:categories="categories"
@@ -43,6 +50,7 @@ export default {
 			bills: [],
 			categories: [],
 			shouldShowAddCategory: true,
+			shouldShowAddBill: true,
 		};
 	},
 	methods: {
@@ -53,6 +61,10 @@ export default {
 		triggerShowAddCategory() {
 			this.shouldShowAddCategory = true;
 		},
+		addBill(bill) {
+			this.bills.push(bill);
+			this.shouldShowAddBill = false;
+		},
 	},
 	watch: {
 		categories() {
@@ -60,6 +72,9 @@ export default {
 				"categories",
 				JSON.stringify(this.categories)
 			);
+		},
+		bills() {
+			localStorage.setItem("bills", JSON.stringify(this.bills));
 		},
 	},
 	mounted() {
@@ -71,6 +86,10 @@ export default {
 
 		if (!this.categories.length) {
 			this.shouldShowAddCategory = true;
+		}
+
+		if (localStorage.getItem("bills")) {
+			this.bills = JSON.parse(localStorage.getItem("bills"));
 		}
 	},
 };
