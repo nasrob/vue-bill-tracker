@@ -22,11 +22,14 @@
 				:key="index"
 				class="p-4 text-center"
 			>
-				<td class="w-1/3 mx-3">
+				<td class="w-1/4 mx-3">
 					{{ moment(bill.date).format("MM DD YYYY") }}
 				</td>
-				<td class="w-1/3 mx-3">{{ bill.amount }}</td>
-				<td class="w-1/3 mx-3">{{ bill.category }}</td>
+				<td class="w-1/4 mx-3">{{ bill.amount }}</td>
+				<td class="w-1/4 mx-3">{{ bill.category }}</td>
+				<td class="w-1/4">
+					<button @click="removeBill(index)">𝗫</button>
+				</td>
 			</tr>
 		</tbody>
 	</table>
@@ -41,6 +44,9 @@ export default {
 	methods: {
 		triggerShowAddBill() {
 			this.$emit("triggerShowAddBill");
+		},
+		removeBill(index) {
+			this.$emit("removeBill", index);
 		},
 	},
 	created() {

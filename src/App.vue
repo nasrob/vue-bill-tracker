@@ -21,10 +21,11 @@
 					<BillsTable
 						:bills="bills"
 						v-on:triggerShowAddBill="triggerShowAddBill"
+						v-on:removeBill="removeBill()"
 					/>
 				</div>
 				<div class="w-1/2">
-					<Chart :bills="activeBills" />
+					<Chart :bills="bills" />
 				</div>
 			</div>
 		</div>
@@ -70,6 +71,11 @@ export default {
 		},
 		triggerShowAddBill() {
 			this.shouldShowAddBill = true;
+		},
+		removeBill(index) {
+			this.bills = this.bills
+				.slice(0, index)
+				.concat(this.bills.slice(index + 1, this.bills.length));
 		},
 	},
 	watch: {
